@@ -1,6 +1,6 @@
 <template>
-    <div>
-        
+    <div class="shopping">
+        Shopping
     </div>
 </template>
 

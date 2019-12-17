@@ -1,6 +1,6 @@
 <template>
-    <div>
-        
+    <div class="classify">
+        Classify
     </div>
 </template>
 
