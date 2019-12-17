@@ -1,6 +1,6 @@
 <template>
     <div class="my">
-        My
+        
     </div>
 </template>
 
@@ -11,3 +11,12 @@ export default {
     
 }
 </script>
+
+
+<style type="text/css" scoped>
+	.my{
+		width: 100%;
+		height: 100vh;
+		background: #F6F6F6;
+	}
+</style>
