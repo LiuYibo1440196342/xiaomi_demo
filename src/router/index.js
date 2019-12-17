@@ -5,6 +5,7 @@ import Home from '../components/Home'
 import Classify from '../components/Classify'
 import Shopping from '../components/Shopping'
 import My from '../components/My'
+import Page from '../components/Page'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/my',
       name: 'My',
       component: My,
+    },
+    {
+      path: '/page',
+      name: 'Page',
+      component: Page,
     },
   ]
 })
