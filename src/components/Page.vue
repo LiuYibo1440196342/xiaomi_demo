@@ -2,33 +2,63 @@
 	<div class="page">
 	  <div class="box">
 		<div class="pagebox">
-			<header class="header">
-				  <van-icon name="replay" size="20" @click="gotohome"/>
-			</header>
-			<van-swipe :autoplay="10000" class="swiper">
-	              <van-swipe-item v-for="(image, index) in images" :key="index" >
-	                  <img :src="image.img" @click="Preview_img(images,index)"/>
+			<van-icon name="arrow-left" size="20" @click="gotohome"/>
+			<van-swipe :autoplay="2000" class="swiper">
+	              <van-swipe-item v-for="(imgs,index) in images" :key="index.id" >
+	                  <img :src="imgs.img" @click="Preview_img(imgs,index)"/>
 	              </van-swipe-item>
          	</van-swipe>
 		</div>
 		<div class="introduce">
-			<h1>{{ name }}</h1>
-			<p>{{ info }}</p>
-			<span>￥{{ price }}</span>
+			<h1>{{ item.name }}</h1>
+			<p>{{ item.info }}</p>
+			<span>￥{{ item.price }}</span>
+			<van-cell title="已选" is-link  value="小米8屏幕指纹"  @click="showBase = true"/>
+			<van-cell title="送至" is-link  value="北京"/>
 		</div>
-	 </div>
 	</div>
+	 <div class="sku-container">
+	        <van-sku
+	          v-model="showBase"
+	          :sku="skuData.sku"
+	          :goods="skuData.goods_info"
+	          :goods-id="skuData.goods_id"
+	          :hide-stock="skuData.sku.hide_stock"
+	          :quota="skuData.quota"
+	          :quota-used="skuData.quota_used"
+	          :initial-sku="initialSku"      
+	          reset-stepper-on-hide
+	          reset-selected-sku-on-hide
+	          disable-stepper-input
+	          :close-on-click-overlay="closeOnClickOverlay" 
+	          :custom-sku-validator="customSkuValidator"  
+	          @buy-clicked="onBuyClicked"
+	          @add-cart="onAddCartClicked"
+	        />
+      </div> 
+ </div>
 </template>
 
 <script type="text/javascript">
+	import skuData from '../assets/js/data.js'; 
 	export default{
 		data(){
             return {
-            	name:this.$route.query.name,
-            	info:this.$route.query.info,
-            	price:this.$route.query.price,
-                images:[],
-            }
+            item:this.$route.query.item,
+            images:this.$route.query.item.imgList,
+		      skuData:skuData,
+		      showBase: false,
+		      showCustom: false,
+		      showStepper: false,
+		      showSoldout: false,
+		      closeOnClickOverlay: true,
+		      initialSku: {
+		        s1: '30349',
+		        s2: '1193',
+		        selectedNum: 3
+		      },
+		      customSkuValidator: () => '请选择xxx!',   
+			}
         },
 		methods:{
 			gotohome(){
@@ -43,13 +73,17 @@
                     startPosition: index
                 })
             },
+            //sku商品规格
+		    onBuyClicked(data) {
+		      this.$toast('buy:' + JSON.stringify(data));
+		      console.log(JSON.stringify(data))
+		    },
+		    onAddCartClicked(data) {
+		      this.$toast('add cart:' + JSON.stringify(data));
+		    }, 
 		},
 		mounted(){
-			//获取swiper轮播图网址
-        	this.$axios.get('https://shiyaming1994.github.io/mi/static/rotationChart.json')
-        	.then(res=>{
-        		this.images=res.data
-        	})
+			
 		}
 	}
 </script>
@@ -60,37 +94,35 @@
 		overflow: hidden;
 	}
 	.page>.box{
-		width: 6.4rem;
-		height:9.7rem; 
+		width: 100%;
+		height:12.2rem; 
 		border:1px solid #ccc;
 		margin: 0 auto;
-		margin-top: 0.27rem;
+		border-bottom: none;
 	}
 	.pagebox{
-		width: 6.4rem;
+		width: 100%;
 		height: 7.1rem;
 		background: #F6F6F6;
+		position: relative;
 	}
-	.pagebox>.header{
-		height: 1rem;
-		line-height: 1rem;
-		background: #F6F6F6;
+	.pagebox>.swiper{
+		width: 100%;
+		height: 7.04rem;
 	}
-	.pagebox>.header>.van-icon{
-		margin-left: 0.3rem;
+	.pagebox>.van-icon{
+		position: absolute;
+		top: .15rem;
+		left: .2rem;
+		z-index: 10;
 	}
-	.swiper{
-		height: 3.2rem;
-		height: 5rem;
-	}
-	.swiper img{
-		width: 5.72rem;
-		height: 5rem;
-		margin-left:0.35rem;
+	.pagebox>.swiper.swiper img{
+		width: 100%;
+		height: 7.04rem;
 	}
 	.introduce{
 		width: 100%;
-		height: 2.62rem;
+		height: 5rem;
 		background: #FFFFFF;
 		overflow: hidden;
 	}
@@ -103,13 +135,23 @@
 		font-size: 0.2rem;
 		margin-top: 0.1rem;
 		margin-left: 0.26rem;
+		margin-right: 0.26rem;
 		color:#999A99;
 	}
 	.introduce>span{
 		margin-left: 0.26rem;
 		margin-top: 0.15rem;
-		font-size: 0.3rem;
+		font-size: 0.35rem;
 		color: #FF6700;
 		display: inline-block;
+		margin-bottom: .24rem;
+	}
+	.van-cell{
+		width: 6.2rem;
+		margin-left: .26rem;
+		background: #FAFAFA;
+	}
+	.sku-container{
+		margin-bottom: .9rem;
 	}
 </style>

@@ -7,7 +7,7 @@
         		<van-icon name="search" size="20"/>
         	</aside>
         </header>
-        <van-swipe :autoplay="10000" class="swiper">
+        <van-swipe :autoplay="2000" class="swiper">
               <van-swipe-item v-for="(image, index) in images" :key="index" >
                   <img :src="image.img" @click="Preview_img(images,index)"/>
               </van-swipe-item>
@@ -38,7 +38,7 @@
          </nav>
          <div class="list">
          	<ul>
-         		<li v-for="item in list" @click="gotopage(item.name,item.info,item.price)">
+         		<li v-for="item in list" @click="gotopage(item)">
          			 <img :src="item.img" ></img>
          			 <h1>{{ item.name }}</h1>
          			 <p>{{ item.content }}</p>
@@ -71,7 +71,7 @@ export default{
         		this.images=res.data
         	})
         },
-         methods: {
+        methods: {
             //轮播图预览
             Preview_img(images, index){
                 ImagePreview({
@@ -82,13 +82,11 @@ export default{
                 })
             },
             //点击进入详情页
-            gotopage(name,info,price){
+            gotopage(item){
             	this.$router.push({
             		path:'/page',
             		query:{
-            			name:name,
-            			info:info,
-            			price:price
+            			item:item
             		}
             	})
             }
@@ -160,16 +158,18 @@ export default{
 	}
 	.list{
 		width: 100%;
+		margin-top: .15rem;
+		margin-bottom: .9rem;
 	}
 	.list>ul{
 		width: 100%;
+		display: flex;
+		justify-content:space-around;
+		flex-wrap: wrap;
 	}
 	.list>ul>li{
 		width: 3.18rem;
 		height: 4.6rem;
-		margin-top: 0.17rem;
-		float: left;
-		margin-left: 0.1rem;
 	}
 	.list>ul>li>img{
 		width: 100%;
@@ -183,13 +183,14 @@ export default{
 	.list>ul>li>p{
 		color: #757575;
 		font-size: 0.2rem;
-		margin-top: 0.14rem;
+		margin-top: 0.05rem;
 		text-indent: 0.2rem;
 	}
 	.list>ul>li>span{
 		color:#EB6962;
-		font-size: 0.2rem;
-		margin-top: 0.14rem;
+		font-size: 0.25rem;
+		margin-top: 0.03rem;
 		margin-left: 0.2rem;
+		display:inline-block;
 	}
 </style>
