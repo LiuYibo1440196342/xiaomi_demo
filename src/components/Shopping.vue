@@ -1,11 +1,10 @@
 <template>
     <div class="shopping">
         <header class="header">
-            <van-nav-bar title="购物车" left-text="" left-arrow>
+            <van-nav-bar title="购物车" left-text="" left-arrow  @click-left="onClickLeft">
             <van-icon name="search" slot="right" size="25" color="#6A6A6A"/>
             </van-nav-bar>
         </header>
-        
         <div class="gologin">
             <div>
                 <p>登录后享受更多优惠</p>
@@ -22,7 +21,9 @@
         <section class="youLike">
             <div class="youLike_head">
                 <h1>猜你喜欢</h1>
-                <h2>实时推荐你的心心念念</h2>
+                <van-divider :style="{ color: '#878787', borderColor: '#878787', padding: '0 0'}">
+                     实时推荐你的心心念念
+                </van-divider>
             </div>
             <div class="shop_like">
                 <div v-for="(item,index) in list" :key="index.id">
@@ -33,9 +34,20 @@
                         <h2>￥{{item.price}}</h2>
                     </div>
                 </div>
-                
             </div>
         </section>
+        <div v-show="flag">
+            <van-submit-bar
+            :price="0"
+            button-text="提交订单"
+            @submit="onSubmit"
+            >
+            <van-checkbox v-model="checked">全选</van-checkbox>
+            <span slot="tip">
+                你的收货地址不支持同城送, <span>修改地址</span>
+            </span>
+            </van-submit-bar>
+        </div>
     </div>
 </template>
 
@@ -43,35 +55,45 @@
 
 <script>
 export default {
+
   data(){
       return{
-          list:[]
+          list:[],
+          flag:false,
+          checked:'',
       }
   },
   mounted(){
       this.$axios.get('https://shiyaming1994.github.io/mi/static/homeGoods.json?page=1')
       .then(res=>{
           this.list = res.data;
-          console.log(this.list)
       })
   },
   methods: {
     onClickLeft() {
-      Toast('返回');
+      this.flag = false;
     },
     onClickRight() {
       Toast('按钮');
+    },
+    onSubmit(){
+        console.log(this.list)
     }
   }
 }
 </script>
 
 <style scoped>
+.van-checkbox{
+    margin-left: .1rem;
+}
 .header{
     width: 100%;
     position: fixed;
     top: 0;
     left: 0;
+    background: #767676;
+    z-index: 100;
 }
 .van-nav-bar__title{
     color: #767676;
@@ -105,8 +127,8 @@ export default {
 }
 .shop{
     width: 100%;
-    height: 1.2rem;
     background: #EBEBEB;
+    display: flex;
 }
 .shop>div{
     width: 3.2rem;
@@ -145,10 +167,8 @@ export default {
     font-size: .25rem;
     color: #FE6E02;
 }
-.youLike_head>h2{
-    font-size: .2rem;
-    margin-top: .07rem;
-    color: #8E8E8E;
+.van-divider{
+    margin: 0 0;
 }
 .shop_like{
     display: flex;
