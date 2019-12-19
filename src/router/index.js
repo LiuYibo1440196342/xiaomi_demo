@@ -5,12 +5,7 @@ import Home from '../components/Home'
 import Classify from '../components/Classify'
 import Shopping from '../components/Shopping'
 import My from '../components/My'
-<<<<<<< HEAD
-import Collect from '../components/Collect.vue'
-import Add from '../components/Add.vue'
-=======
 import Page from '../components/Page'
->>>>>>> 68755b672544d56bcade23953f1805582c9bbb34
 
 Vue.use(Router)
 

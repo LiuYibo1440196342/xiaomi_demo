@@ -38,8 +38,8 @@
          </nav>
          <div class="list">
          	<ul>
-         		<li v-for="item in list" @click="gotopage(item)">
-         			 <img :src="item.img" ></img>
+         		<li v-for="item in list" @click="gotopage(item)" :key="item.id">
+         			 <img :src="item.img"/>
          			 <h1>{{ item.name }}</h1>
          			 <p>{{ item.content }}</p>
          			 <span>￥{{ item.price }}</span>
