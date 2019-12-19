@@ -79,7 +79,7 @@
 	export default{
 		data(){
 			return{
-
+				a:100
 			}
 		},
 		methods:{
