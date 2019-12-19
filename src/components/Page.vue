@@ -13,8 +13,16 @@
 			<h1>{{ item.name }}</h1>
 			<p>{{ item.info }}</p>
 			<span>￥{{ item.price }}</span>
-			<van-cell title="已选" is-link  value="小米8屏幕指纹"  @click="showBase = true"/>
-			<van-cell title="送至" is-link  value="北京"/>
+			<div class="cell" @click="showBase=true">
+				<span>已选</span>
+				<p>小米8屏幕指纹版</p>
+				<van-icon name="arrow" size="20"/>
+			</div>
+			<div class="cell">
+				<span>送至</span>
+				<p>北京</p>
+				<van-icon name="arrow" size="20"/>
+			</div>
 		</div>
 	</div>
 	 <div class="sku-container">
@@ -83,7 +91,7 @@
 		    }, 
 		},
 		mounted(){
-			
+			console.log(this.item)
 		}
 	}
 </script>
@@ -146,10 +154,32 @@
 		display: inline-block;
 		margin-bottom: .24rem;
 	}
-	.van-cell{
+	.cell{
 		width: 6.2rem;
+		height: 0.85rem;
 		margin-left: .26rem;
 		background: #FAFAFA;
+		position: relative;
+	}
+	.cell:first-of-type{
+		border-bottom: 1px solid #ccc;
+	}
+	.cell>span{
+		font-size: 0.22rem;
+		line-height: .85rem;
+		color:#A0A0A0; 
+		margin: .28rem 0 0 .28rem
+	}
+	.cell>p{
+		margin: .3rem 0 0 .3rem;
+		color:#000018;
+		font-size: .2rem;
+		display: inline-block;
+	}
+	.cell>.van-icon{
+		position: absolute;
+		right: .22rem;
+		top:.3rem;
 	}
 	.sku-container{
 		margin-bottom: .9rem;
