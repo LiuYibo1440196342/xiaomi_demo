@@ -87,7 +87,8 @@
             images:this.$route.query.item.imgList,
             edition:this.$route.query.item.edition,
             color:this.$route.query.item.edition[0].color,
-            colors:this.$route.query.item.edition[0].color[0].color_list
+            colors:this.$route.query.item.edition[0].color[0].color_list,
+            a:111,
 		 }
         },
 		methods:{
