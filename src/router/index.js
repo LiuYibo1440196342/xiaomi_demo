@@ -6,6 +6,8 @@ import Classify from '../components/Classify'
 import Shopping from '../components/Shopping'
 import My from '../components/My'
 import Page from '../components/Page'
+import Collect from '../components/collect'
+import Add from '../components/add'
 
 Vue.use(Router)
 

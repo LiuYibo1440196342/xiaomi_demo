@@ -72,7 +72,6 @@ export default {
     };
   },
   mounted() {
-    console.log($(".van-sidebar  .van-sidebar-item"));
     var mark = 1;
     $(".van-sidebar-item").click(function() {
       $(this)
@@ -82,11 +81,8 @@ export default {
       mark = 2;
       var h = 0;
       var index = $(this).index();
-      console.log(index);
       //  h =$('.sddd').eq(index).offset().top
       h = index * $(".sddd").height() + 1;
-      console.log($(".van-col--18").scrollTop());
-      console.log(h);
       $(".van-col--18").animate(
         {
           scrollTop: h
@@ -104,7 +100,6 @@ export default {
           var index = $(this).index();
           var h = index * $(".sddd").height();
           if (H > h) {
-            console.log(index);
             $(".van-sidebar-item")
               .eq(index)
               .addClass("van-sidebar-item--select")
@@ -118,15 +113,12 @@ export default {
     this.$axios
       .get("https://shiyaming1994.github.io/mi/static/rotationChart.json")
       .then(res => {
-        console.log(res);
         this.images = res.data;
-        console.log(this.images);
       });
     this.$axios
       .get("https://shiyaming1994.github.io/mi/static/homeGoods.json?page=1")
       .then(res => {
         this.arr = res.data;
-        console.log(res);
       });
   },
   methods: {

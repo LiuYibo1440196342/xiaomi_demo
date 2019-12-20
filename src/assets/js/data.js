@@ -42,7 +42,7 @@ export default {
     list: [
       {
         id: 2259,
-        price: 120, //价格
+        price: 12000, //价格
         discount: 122, 
         s1: '1215',
         s2: '1193',
@@ -87,7 +87,7 @@ export default {
         s5: '0',  
         stock_num: 50, //库存 
         goods_id: 946755
-      }
+      },
     ],
     price: '5.00',
     stock_num: 227, // 商品总库存

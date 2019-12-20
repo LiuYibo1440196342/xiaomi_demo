@@ -1,6 +1,6 @@
 <template>
     <div class="shopping">
-        <header class="header">
+        <header class="headers">
             <van-nav-bar title="购物车" left-text="" left-arrow  @click-left="onClickLeft">
             <van-icon name="search" slot="right" size="25" color="#6A6A6A"/>
             </van-nav-bar>
@@ -48,6 +48,7 @@
             </span>
             </van-submit-bar>
         </div>
+        
     </div>
 </template>
 
@@ -87,7 +88,7 @@ export default {
 .van-checkbox{
     margin-left: .1rem;
 }
-.header{
+.headers{
     width: 100%;
     position: fixed;
     top: 0;

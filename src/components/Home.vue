@@ -83,7 +83,6 @@ export default{
             },
             //点击进入详情页
             gotopage(item){
-            	console.log(111)
             	this.$router.push({
             		path:'/page',
             		query:{

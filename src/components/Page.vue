@@ -52,18 +52,18 @@
 	export default{
 		data(){
             return {
-            item:this.$route.query.item,
-            images:this.$route.query.item.imgList,
-		      skuData:skuData,
-		      showBase: false,
-		      showCustom: false,
-		      showStepper: false,
-		      showSoldout: false,
-		      closeOnClickOverlay: true,
-		      initialSku: {
-		        s1: '30349',
-		        s2: '1193',
-		        selectedNum: 3
+				item:this.$route.query.item,
+				images:this.$route.query.item.imgList,
+				skuData:skuData,
+				showBase: false,
+				showCustom: false,
+				showStepper: false,
+				showSoldout: false,
+				closeOnClickOverlay: true,
+				initialSku: {
+				s1: '30349',
+				s2: '1193',
+				selectedNum: 3,
 		      },
 		      customSkuValidator: () => '请选择xxx!',   
 			}
@@ -91,7 +91,7 @@
 		    }, 
 		},
 		mounted(){
-			
+			console.log(this.item.edition)
 		}
 	}
 </script>
