@@ -43,6 +43,7 @@
       localStorage.setItem("province",content.province)
       localStorage.setItem("tel",content.tel)
       localStorage.setItem("isDefault",content.isDefault)
+      this.$router.go(-2);
     },
     onDelete() {
       Toast('delete');
