@@ -72,6 +72,9 @@ export default new Router({
       path: '/page',
       name: 'Page',
       component: Page,
+      meta:{
+        flag:false
+      }
     },
   ]
 })

@@ -13,9 +13,12 @@
             </div>
         </div>
         <div class="shop">
-            <div>
+            <div v-show="this.$store.state.con==0">
                 <p>购物车还是空的</p>
                 <h1>去逛逛</h1>
+            </div>
+            <div class="shopContit" v-show="this.$store.state.con>0">
+                <img :src="this.$store.state.imgsrc" alt="">
             </div>
         </div>
         <section class="youLike">
@@ -48,7 +51,6 @@
             </span>
             </van-submit-bar>
         </div>
-        
     </div>
 </template>
 
@@ -62,23 +64,24 @@ export default {
           list:[],
           flag:false,
           checked:'',
+          
       }
   },
   mounted(){
       this.$axios.get('https://shiyaming1994.github.io/mi/static/homeGoods.json?page=1')
       .then(res=>{
           this.list = res.data;
-      })
+      });
   },
   methods: {
     onClickLeft() {
-      this.flag = false;
+      this.$router.push('/home')
     },
     onClickRight() {
-      Toast('按钮');
+     
     },
     onSubmit(){
-        console.log(this.list)
+
     }
   }
 }
@@ -199,5 +202,10 @@ export default {
     font-size: .19rem;
     color: #EA625B;
     margin: .12rem 0 0 .20rem;
+}
+.shop>.shopContit{
+    width: 100%;
+    height: 2rem;
+    background: red
 }
 </style>
