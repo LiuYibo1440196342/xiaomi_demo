@@ -1,11 +1,11 @@
 <template>
   <div>
   	<header>
-			<van-icon name="arrow-left" size="20"/>
+			<van-icon name="arrow-left" size="20" @click="end"/>
 			<p>分类</p>
 			<van-icon name="search" size="20"/>
 		</header>
-    <van-pull-refresh v-model="isLoading" @refresh="onRefresh">
+    <van-pull-refresh v-model="isLoading">
       <van-row>
         <van-col span="6">
           <van-sidebar v-model="activeKey">
@@ -30,7 +30,7 @@
             >{{item}}</van-divider>
             <div class="shou">
               <ul>
-                <li v-for="(item,index) in arr" :key="index" @click='details(index)'>
+                <li v-for="(item,index) in arr" :key="index">
                     <img src="../assets/img/r4_c.jpg" alt />
                     <p>{{item.name}}</p>
                 </li>
@@ -39,6 +39,10 @@
             <div class="aut">
               <van-button type="warning">查看更多</van-button>
             </div>
+          </div>
+         <div class="footer">
+               <img src="../assets/img/banner1.jpg" alt="">
+               <img src="../assets/img/banner2.jpg" alt="">
           </div>
         </van-col>
       </van-row>
@@ -72,7 +76,6 @@ export default {
     };
   },
   mounted() {
-    console.log($(".van-sidebar  .van-sidebar-item"));
     var mark = 1;
     $(".van-sidebar-item").click(function() {
       $(this)
@@ -82,11 +85,8 @@ export default {
       mark = 2;
       var h = 0;
       var index = $(this).index();
-      console.log(index);
       //  h =$('.sddd').eq(index).offset().top
       h = index * $(".sddd").height() + 1;
-      console.log($(".van-col--18").scrollTop());
-      console.log(h);
       $(".van-col--18").animate(
         {
           scrollTop: h
@@ -104,7 +104,6 @@ export default {
           var index = $(this).index();
           var h = index * $(".sddd").height();
           if (H > h) {
-            console.log(index);
             $(".van-sidebar-item")
               .eq(index)
               .addClass("van-sidebar-item--select")
@@ -115,36 +114,17 @@ export default {
       }
     });
 
-    this.$axios
-      .get("https://shiyaming1994.github.io/mi/static/rotationChart.json")
-      .then(res => {
-        console.log(res);
-        this.images = res.data;
-        console.log(this.images);
-      });
+  
     this.$axios
       .get("https://shiyaming1994.github.io/mi/static/homeGoods.json?page=1")
       .then(res => {
         this.arr = res.data;
-        console.log(res);
       });
   },
-  methods: {
-    onRefresh() {
-      setTimeout(() => {
-        this.$toast("刷新成功");
-        this.isLoading = false;
-        this.count++;
-      }, 500);
-    },
-    details(i){
-       this.$router.push({
-         name:'details',
-         query:{
-           i
-       }
-       })
-    }
+  methods:{
+    end(){
+        this.$router.go(-1);
+      },
   }
 };
 </script>
@@ -173,6 +153,7 @@ header{
 .van-row {
   width: 100%;
   background: #fff;
+  margin-bottom: 0.5rem;
 }
 .van-sidebar {
   width: 100%;
@@ -236,7 +217,7 @@ header{
   overflow-y: scroll;
 }
 .van-col{
-
+  height: 100vh;
 }
 .van-sidebar-item--select {
   color: red;
@@ -244,5 +225,17 @@ header{
 .imgbanner{
 	width:4.74rem;
 	height: 1.96rem;
+}
+.footer{
+  height:6rem;
+}
+.footer img{
+  width:100%;
+  margin-top: 1rem;
+}
+.footer img:nth-of-type(2){
+  width:90%;
+  margin-top: 0.3rem;
+  margin-left: 0.2rem;
 }
 </style>

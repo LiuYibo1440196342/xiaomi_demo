@@ -13,20 +13,20 @@
 				<h2>删除</h2>
 			</div>
 			<div class="base">
-				<p>北京 北京市 顺义区</p>
+				<p>北京市 顺义区</p>
 				<p>居鑫花园1号楼, 1单元, 1201</p>
 				<van-icon name="arrow" size="20"/>
 			</div>
 		</div>
-		<div class="site">
+		<div class="site" v-for='(item,index) in list'>
 			<div class="head">
-				<p>诸葛铁牛</p>
-				<h2>131****6588 <span>[默认]</span></h2>
+				<p>{{ item.name }}</p>
+				<h2>{{ item.tel }}<span></span></h2>
 				<h2>删除</h2>
 			</div>
 			<div class="base">
-				<p>北京 北京市 顺义区</p>
-				<p>居鑫花园1号楼, 1单元, 1201</p>
+				<p>{{ item.city }} {{ item.county }}</p>
+				<p>{{ item.addressDetail }}</p>
 				<van-icon name="arrow" size="20"/>
 			</div>
 		</div>
@@ -41,7 +41,16 @@
 	export default{
 		data(){
 			return{
-
+				list:[],
+				obj:{},
+				name:localStorage.getItem("name"),
+				addressDetail:localStorage.getItem("addressDetail"),
+				areaCode:localStorage.getItem("areaCode"),
+				city:localStorage.getItem("city"),
+				county:localStorage.getItem("county"),
+				postalCode:localStorage.getItem("postalCode"),
+				province:localStorage.getItem("province"),
+				tel:localStorage.getItem("tel")
 			}
 		},
 		methods:{
@@ -50,8 +59,26 @@
 			},
 			jump(){
 				this.$router.push('/add')
+			},
+			init(){
+				if (localStorage.getItem("name") != '') {
+					this.obj.name = this.name
+					this.obj.addressDetail = this.addressDetail
+					this.obj.areaCode = this.areaCode
+					this.obj.city = this.city
+					this.obj.county = this.county
+					this.obj.postalCode = this.postalCode
+					this.obj.province = this.province
+					this.obj.tel = this.tel
+					this.list.push(this.obj)
+					console.log(this.list)
+				}
 			}
+		},
+		mounted(){
+			this.init()
 		}
+
 	}
 </script>
 
