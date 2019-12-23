@@ -5,54 +5,63 @@
 			<p>收货地址</p>
 			<van-icon name="search" size="20"/>
 		</header>
-		<div class="box">
-		<div class="site">
-			<div class="head">
-				<p>诸葛铁牛</p>
-				<h2>131****6588 <span>[默认]</span></h2>
-				<h2>删除</h2>
-			</div>
-			<div class="base">
-				<p>北京 北京市 顺义区</p>
-				<p>居鑫花园1号楼, 1单元, 1201</p>
-				<van-icon name="arrow" size="20"/>
-			</div>
-		</div>
-		<div class="site">
-			<div class="head">
-				<p>诸葛铁牛</p>
-				<h2>131****6588 <span>[默认]</span></h2>
-				<h2>删除</h2>
-			</div>
-			<div class="base">
-				<p>北京 北京市 顺义区</p>
-				<p>居鑫花园1号楼, 1单元, 1201</p>
-				<van-icon name="arrow" size="20"/>
-			</div>
-		</div>
-		</div>
-		<footer @click="jump">
-			新 建 地 址
-		</footer>
+		<van-address-list
+  v-model="chosenAddressId"
+  :list="list"
+  :disabled-list="disabledList"
+  disabled-text="以下地址超出配送范围"
+  @add="onAdd"
+/>
 	</div>
 </template>
 
 <script type="text/javascript">
-	export default{
-		data(){
-			return{
+	export default {
+  data() {
+    return {
+      chosenAddressId: '1',
+      list: [
+        {
+          id: '1',
+          name: '张三',
+          tel: '13000000000',
+          address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室'
+        },
+        {
+          id: '2',
+          name: '李四',
+          tel: '1310000000',
+          address: '浙江省杭州市拱墅区莫干山路 50 号'
+        },{
+        	id:'3',
+        	name:localStorage.getItem("name"),
+			address:localStorage.getItem("addressDetail"),
+			tel:localStorage.getItem("tel")
+        }
+      ],
+      disabledList: [
+        {
+          id: '3',
+          name: '王五',
+          tel: '1320000000',
+          address: '浙江省杭州市滨江区江南大道 15 号'
+        }
+      ]
+    }
+  },
 
-			}
-		},
-		methods:{
-			end(){
+  methods: {
+    onAdd() {
+     this.$router.push('/add')
+    },
+    end(){
 				this.$router.go(-1);
 			},
 			jump(){
 				this.$router.push('/add')
 			}
-		}
-	}
+  }
+}
 </script>
 
 <style type="text/css" scoped>
@@ -82,62 +91,5 @@
        margin-right: 0.3rem;
        margin-top: 0.3rem;
 	}
-	.site{
-       width: 90%;
-       height: 2rem;
-       border: 1px solid #EEEEEE;
-       margin: auto;
-       margin-top: 0.16rem;
-       border-radius: 0.03rem;
-	}
-	.head{
-		width: 90%;
-		height: 1rem;
-		border-bottom:1px solid #EEEEEE;
-		margin: auto;
-		display: flex;
-		flex-direction:row;
-		justify-content:space-around;
-		line-height: 1rem;
-	}
-	.head p{
-		font-size: 0.25rem;
-		color: #FF6B09;
-	}
-	.head span{
-		color:#FF6B09;
-	}
-	.head h2:last-of-type{
-		color:#9D9D9D;
-	}
-	.base{
-		width: 90%;
-		height: 1rem;
-		margin: auto;
-		margin-left: 0.6rem;
-		font-size: 0.25rem;	
-		position: relative;	
-	}
-    .base p:first-of-type{
-    	width: 4.42rem;
-    	margin-top: 0.15rem;
-    	font-size: 0.25rem;
-    }    
-    .base .van-icon{
-    	position: absolute;
-        right:0.3rem;
-        top: 0.15rem;
-    }
-    footer{
-    	width:100%;
-    	height: 0.84rem;
-    	background: #FF6700;
-    	text-align: center;
-    	line-height: 0.84rem;
-    	position: fixed;
-    	bottom: 0;
-    	left: 0;
-    	color:#fff;
-    	font-size: 0.25rem;
-    }
+	
 </style>

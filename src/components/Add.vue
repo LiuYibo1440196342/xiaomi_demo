@@ -6,24 +6,59 @@
 			<van-icon name="search" size="20"/>
 		</header>
 		<van-address-edit
+  :area-list="areaList"
   show-postal
   show-delete
   show-set-default
   show-search-result
+  :search-result="searchResult"
+  :area-columns-placeholder="['请选择', '请选择', '请选择']"
+  @save="onSave"
+  @delete="onDelete"
+  @change-detail="onChangeDetail"
 />
 	</div>
 </template>
 
 <script type="text/javascript">
+	import datalist from '../assets/data/area.js'
 	export default {
   data() {
     return {
-
+      areaList:datalist,
+      searchResult: [],
+      locallist:{}
     }
   },
 
   methods: {
-  	end(){
+    onSave(content) {
+    	console.log(content)
+      localStorage.setItem("name",content.name)
+      localStorage.setItem("addressDetail",content.addressDetail)
+      localStorage.setItem("areaCode",content.areaCode)
+      localStorage.setItem("city",content.city)
+      localStorage.setItem("county",content.county)
+      localStorage.setItem("postalCode",content.postalCode)
+      localStorage.setItem("province",content.province)
+      localStorage.setItem("tel",content.tel)
+      localStorage.setItem("isDefault",content.isDefault)
+      this.$router.go(-2);
+    },
+    onDelete() {
+      Toast('delete');
+    },
+    onChangeDetail(val) {
+      if (val) {
+        this.searchResult = [{
+          name: '黄龙万科中心',
+          address: '杭州市西湖区'
+        }];
+      } else {
+        this.searchResult = [];
+      }
+    },
+    	end(){
 				this.$router.go(-1);
 			}
   }
